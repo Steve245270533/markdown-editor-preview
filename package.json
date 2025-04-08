@@ -1,13 +1,36 @@
 {
   "name": "markdown-editor-preview",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
+  "description": "markdown-editor-preview",
+  "keywords": [
+    "markdown",
+    "editor",
+    "vue",
+    "markdown-preview"
+  ],
+  "author": "Steve245270533",
   "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/markdown-editor-preview.js"
+    },
+    "./style.css": "./lib/markdown-editor-preview.css"
+  },
+  "main": "./lib/markdown-editor-preview.js",
+  "module": "./lib/markdown-editor-preview.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "build:page": "run-p type-check \"build-only {@}\" --",
+    "build:pkg": "vue-tsc --build && vite build --mode lib",
     "type-check": "vue-tsc --build",
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
     "lint:eslint": "eslint . --fix",

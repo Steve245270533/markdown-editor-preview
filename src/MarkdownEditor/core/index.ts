@@ -19,3 +19,4 @@ export { default as collapsible } from "./collapsible";
 export { default as fence } from "./web/fence";
 export { default as media } from "./web/media";
 export { default as highlight } from "./web/highlight";
+export type * from "./types";

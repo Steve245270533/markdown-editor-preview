@@ -14,7 +14,8 @@
 </template>
 
 <script setup lang='ts'>
-import {ComponentPublicInstance, computed, onMounted, onUnmounted, ref, shallowRef, watch} from "vue";
+import {computed, onMounted, onUnmounted, ref, shallowRef, watch} from "vue";
+import type {ComponentPublicInstance} from "vue";
 import {refDebounced} from "@vueuse/core";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import "monaco-editor/esm/vs/basic-languages/markdown/markdown.contribution.js";
@@ -24,10 +25,11 @@ import "monaco-editor/esm/vs/editor/contrib/linesOperations/browser/linesOperati
 import "monaco-editor/esm/vs/editor/contrib/dnd/browser/dnd.js";
 import "monaco-editor/esm/vs/editor/contrib/multicursor/browser/multicursor.js";
 import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneCommandsQuickAccess.js";
-import MarkdownView, {Renderer} from "./MarkdownView.vue";
+import MarkdownView from "./MarkdownView.vue";
 import setupScrollSync from "./sync-scroll.ts";
 import * as md from "monaco-editor/esm/vs/basic-languages/markdown/markdown.js";
 import {kfmPreset, MarkdownIt, sourceLine} from "./core";
+import type {Renderer} from "./core";
 
 const rich = new MarkdownIt();
 rich.use(kfmPreset);

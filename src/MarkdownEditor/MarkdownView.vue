@@ -19,10 +19,7 @@ guest.use(kfmPreset, { guest: true });
 import type { LazyLoadOptions } from "./core";
 import { computed } from "vue";
 import MarkdownBox from "./MarkdownBox.vue";
-
-export type Renderer = "rich" | "guest" | {
-	render(text: string, env: object): string,
-};
+import type { Renderer } from "./core";
 
 const { value, renderer, docId } = defineProps<{
 	/**
