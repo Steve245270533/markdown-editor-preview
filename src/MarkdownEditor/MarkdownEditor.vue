@@ -27,41 +27,13 @@ import "monaco-editor/esm/vs/editor/contrib/multicursor/browser/multicursor.js";
 import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneCommandsQuickAccess.js";
 import MarkdownView from "./MarkdownView.vue";
 import setupScrollSync from "./sync-scroll.ts";
-import * as md from "monaco-editor/esm/vs/basic-languages/markdown/markdown.js";
-import {kfmPreset, MarkdownIt, sourceLine} from "./core";
 import type {Renderer} from "./core";
+import {rich, guest, setupMarkdownTokenizer} from "./core";
 
-const rich = new MarkdownIt();
-rich.use(kfmPreset);
-rich.use(sourceLine);
-// 自定义渲染器，给 list_item 添加自定义属性。
-// rich.renderer.rules.list_item_open = function(tokens, idx, options, env, self) {
-// 	const token = tokens[idx];
-// 	token.attrSet('data-xxx', "test");
-// 	return self.renderToken(tokens, idx, options);
-// }
-
-const guest = new MarkdownIt();
-guest.use(kfmPreset, { guest: true });
-guest.use(sourceLine);
-
-const WORD_SEPARATORS =
-	"`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"	// USUAL_WORD_SEPARATORS
-	+ "·！￥…*（）—【】：；‘’“”、《》，。？"	// 中文符号。
-	+ "「」｛｝＜＞・～＠＃＄％＾＆＊＝『』";	// 日韩符号。
-
-// 给自定义的两个语法 TOC 和 Directive 添加解析支持。
-const { tokenizer } = md.language;
-tokenizer.root.unshift([/^(\[\[TOC]])/, ["keyword.toc"]]);
-tokenizer.root.unshift([
-  /^(@\w+)(!?\[)((?:[^\]\\]|@escapes)*)(]\([^)]+\))/,
-  ["type.directive", "string.link", "", "string.link"],
-]);
 
 const props = withDefaults(defineProps<{
 	/**
 	 * Markdown 渲染器，可以为 MarkdownIt 的实例。
-	 * 如果是字符串则使用 @kaciras-blog/markdown/presets 里对应的。
 	 */
 	renderer?: Renderer,
 
@@ -73,7 +45,10 @@ const props = withDefaults(defineProps<{
 	debounce?: number,
 }>(), {
   debounce: 500,
+  renderer: "rich"
 });
+
+setupMarkdownTokenizer();
 
 /**
  * 编辑的文本，从外部修改会导致编辑状态（光标、滚动条等等）重置。
@@ -98,6 +73,11 @@ let editor: monaco.editor.IStandaloneCodeEditor;
 
 // 保存当前内容的副本，用于判断 content 是由外部还是这里修改的。
 let contentSnapshot = content.value;
+
+const WORD_SEPARATORS =
+  "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"	// USUAL_WORD_SEPARATORS
+  + "·！￥…*（）—【】：；‘’“”、《》，。？"	// 中文符号。
+  + "「」｛｝＜＞・～＠＃＄％＾＆＊＝『』";	// 日韩符号。
 
 watch(content, value => value !== contentSnapshot && editor.setValue(value));
 

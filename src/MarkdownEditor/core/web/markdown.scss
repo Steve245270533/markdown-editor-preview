@@ -41,6 +41,7 @@
 
 	ol, ul {
 		margin: 1em 0;
+    padding-inline-start: 40px;
 
 		@media (max-width: 768px) {
 			padding-left: 24px;
@@ -210,6 +211,11 @@
 	tbody + tbody {
 		border-top: calc(2 * var(--table-border-width)) solid var(--table-border-color);
 	}
+
+  p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+  }
 }
 
 /* 直接在 table 上加滚动无效，必须包一层 */

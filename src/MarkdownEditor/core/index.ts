@@ -7,6 +7,7 @@ export * from "./utils";
 export * from "./miscellaneous";
 export * from "./activate";
 export * from "./diagnostics";
+export * from "./presets";
 
 export { default as MarkdownIt } from "markdown-it";
 
@@ -19,4 +20,5 @@ export { default as collapsible } from "./collapsible";
 export { default as fence } from "./web/fence";
 export { default as media } from "./web/media";
 export { default as highlight } from "./web/highlight";
+
 export type * from "./types";

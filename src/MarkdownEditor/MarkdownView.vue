@@ -1,25 +1,16 @@
 <!-- 将 Markdown 转换成 HTML 并显示出来的组件。-->
 <template>
-	<MarkdownBox :html='html'
-:lazy-loading='lazyLoading'/>
+	<MarkdownBox
+    :html='html'
+    :lazy-loading='lazyLoading'
+  />
 </template>
 
-<script lang='ts'>
-import { kfmPreset, MarkdownIt } from "./core";
-// TODO 考虑是否多余
-// 把几个预设提前放这，免得跟随组件实例每次都创建。
-const rich = new MarkdownIt();
-rich.use(kfmPreset);
-
-const guest = new MarkdownIt();
-guest.use(kfmPreset, { guest: true });
-</script>
-
 <script setup lang='ts'>
-import type { LazyLoadOptions } from "./core";
 import { computed } from "vue";
 import MarkdownBox from "./MarkdownBox.vue";
-import type { Renderer } from "./core";
+import {rich, guest} from "./core";
+import type { LazyLoadOptions, Renderer } from "./core";
 
 const { value, renderer, docId } = defineProps<{
 	/**
