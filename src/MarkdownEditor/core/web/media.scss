@@ -1,0 +1,30 @@
+/* noinspection CssUnresolvedCustomProperty */
+.md-img, .gif {
+	width: var(--width);
+	max-width: 100%;
+	aspect-ratio: var(--aspect);
+}
+
+/* 包裹图片的 <a>，阻隔了 flex 所以得传透下 */
+.md-inspect {
+	max-width: 100%;
+}
+
+.md-img {
+	display: block;
+	resize: none;
+}
+
+.md-video {
+	width: 100%;
+	height: 360px;
+}
+
+/* 方块字不适合斜体，还是别乱加样式了 */
+.md-alt {
+	padding-top: .5em;
+
+	&::before { content: "「 "; }
+
+	&::after { content: " 」"; }
+}
