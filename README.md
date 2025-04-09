@@ -20,8 +20,8 @@ Markdown预览编辑器是一款功能强大的工具，支持双向滚动同步
 <template>
 	<div class="container">
 		<MarkdownEditor
-            v-model='content'
-            renderer='rich'
+	            v-model='content'
+	            renderer='rich'
 		>
 		</MarkdownEditor>
 	</div>
