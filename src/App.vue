@@ -10,7 +10,7 @@
 
 <script setup lang='ts'>
 import { useLocalStorage } from "@vueuse/core";
-import {MarkdownEditor} from "./MarkdownEditor";
+import { MarkdownEditor } from "./MarkdownEditor";
 import document from "./assets/KFM-zh.md?raw";
 
 const content = useLocalStorage("Content", document, {
@@ -18,14 +18,7 @@ const content = useLocalStorage("Content", document, {
 });
 </script>
 
-<style>
-body {
-	margin: 0;
-	color: #222;
-	font-family: sans-serif;
-	font-size: 1rem;
-}
-
+<style scoped>
 .container {
 	height: 100vh;
 }

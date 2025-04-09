@@ -20,7 +20,7 @@ function parseDataLine(el: Element) {
  * @param preview 预览区。
  * @param enabled 用于切换同步的开关。
  */
-export default function (editor: Editor, preview: HTMLElement, enabled: Ref<boolean>) {
+export function setupScrollSync(editor: Editor, preview: HTMLElement, enabled: Ref<boolean>) {
   let lastScrollEditor = false;
   let ignoreScroll = false;
   let cacheVersion: number;

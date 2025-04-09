@@ -1,7 +1,7 @@
 import * as md from "monaco-editor/esm/vs/basic-languages/markdown/markdown.js";
 import MarkdownIt from "markdown-it";
-import {kfmPreset} from "./miscellaneous.ts";
-import {sourceLine} from "./diagnostics.ts";
+import { kfmPreset } from "./miscellaneous.ts";
+import { sourceLine } from "./diagnostics.ts";
 
 // 预设渲染器
 const rich = new MarkdownIt();

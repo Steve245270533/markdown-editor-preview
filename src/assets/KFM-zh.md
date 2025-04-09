@@ -1,12 +1,14 @@
-# Kaciras Flavored Markdown
+# markdown-editor-preview
 
-该页面是 Kaciras Flavored Markdown (KFM) 的演示，所有插入的图片和视频等均保存在内存中。
+该项目基于 [kaciras-blog/markdown](https://github.com/kaciras-blog/markdown) 修改，感谢原作者贡献！
 
-**项目地址：[https://github.com/kaciras-blog/markdown](https://github.com/kaciras-blog/markdown)，包含 [Markdown-It](https://github.com/markdown-it/markdown-it) 的插件和一个基于 [Monaco Editor](https://microsoft.github.io/monaco-editor/) 实现的在线编辑器。**
+该页面所有插入的图片和视频等均保存在内存中。
+
+**项目地址：[markdown-editor-preview](https://github.com/Steve245270533/markdown-editor-preview)，包含 [Markdown-It](https://github.com/markdown-it/markdown-it) 的插件和一个基于 [Monaco Editor](https://microsoft.github.io/monaco-editor/) 实现的在线编辑器。**
 
 Markdown 是一种轻量级的标记语言，由 John Gruber 于 2004 年创建，如今已成为世界上最受欢迎的标记语言之一，特别是程序员喜欢使用。
 
-KFM 是对 Markdown 语法的扩展，兼容标准的 Markdown，同时添加了一些新的功能。
+[KFM](https://github.com/kaciras-blog/markdown) 是对 Markdown 语法的扩展，兼容标准的 Markdown，同时添加了一些新的功能。
 
 # KFM 的特点
 

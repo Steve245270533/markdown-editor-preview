@@ -1,22 +1,31 @@
 <template>
 	<div class='container'>
-		<div
-			ref='editorEl'
-			class='editor'
-		/>
-		<MarkdownView
-			ref='previewEl'
-			:renderer='editorRenderer'
-			:value='debounced'
-			class='preview'
-		/>
+    <SplitBoard
+      :max="0.7"
+      :min="0.3"
+    >
+      <template #1>
+        <div
+          ref='editorEl'
+          class='editor'
+        />
+      </template>
+      <template #2>
+        <MarkdownView
+          ref='previewEl'
+          :renderer='editorRenderer'
+          :value='debounced'
+          class='preview'
+        />
+      </template>
+    </SplitBoard>
 	</div>
 </template>
 
 <script setup lang='ts'>
-import {computed, onMounted, onUnmounted, ref, shallowRef, watch} from "vue";
-import type {ComponentPublicInstance} from "vue";
-import {refDebounced} from "@vueuse/core";
+import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
+import type { ComponentPublicInstance } from "vue";
+import { refDebounced } from "@vueuse/core";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import "monaco-editor/esm/vs/basic-languages/markdown/markdown.contribution.js";
 import "monaco-editor/esm/vs/base/browser/ui/codicons/codiconStyles.js";
@@ -25,10 +34,10 @@ import "monaco-editor/esm/vs/editor/contrib/linesOperations/browser/linesOperati
 import "monaco-editor/esm/vs/editor/contrib/dnd/browser/dnd.js";
 import "monaco-editor/esm/vs/editor/contrib/multicursor/browser/multicursor.js";
 import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneCommandsQuickAccess.js";
+import { rich, guest, setupMarkdownTokenizer, setupScrollSync } from "../core";
 import MarkdownView from "./MarkdownView.vue";
-import setupScrollSync from "./sync-scroll.ts";
-import type {Renderer} from "./core";
-import {rich, guest, setupMarkdownTokenizer} from "./core";
+import SplitBoard from "./SplitBoard/index.vue";
+import type { Renderer } from "../core";
 
 
 const props = withDefaults(defineProps<{
@@ -116,13 +125,13 @@ onMounted(() => {
 }
 
 .editor {
-	width: 50%;
+	width: 100%;
 	height: 100%;
 }
 
 .preview {
 	box-sizing: border-box;
-	width: 50%;
+	width: 100%;
 	height: 100%;
 	padding: 16px;
 	overflow-y: scroll;

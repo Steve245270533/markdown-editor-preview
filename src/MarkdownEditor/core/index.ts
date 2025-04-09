@@ -8,6 +8,7 @@ export * from "./miscellaneous";
 export * from "./activate";
 export * from "./diagnostics";
 export * from "./presets";
+export * from "./sync-scroll.ts";
 
 export { default as MarkdownIt } from "markdown-it";
 

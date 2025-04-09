@@ -1,4 +1,4 @@
-import {silencePromise, identity} from "../utils";
+import { silencePromise, identity } from "../utils";
 
 export type LazyElement = HTMLMediaElement | HTMLImageElement;
 

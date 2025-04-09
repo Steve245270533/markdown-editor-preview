@@ -9,8 +9,8 @@
 <script setup lang='ts'>
 import { computed } from "vue";
 import MarkdownBox from "./MarkdownBox.vue";
-import {rich, guest} from "./core";
-import type { LazyLoadOptions, Renderer } from "./core";
+import { rich, guest } from "../core";
+import type { LazyLoadOptions, Renderer } from "../core";
 
 const { value, renderer, docId } = defineProps<{
 	/**

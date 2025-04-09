@@ -31,6 +31,7 @@ export default defineConfigWithVueTs(
       "@stylistic/js/indent": ["error", 2],
       "@stylistic/js/quotes": ["error", "double"],
       "@stylistic/js/semi": ["error", "always"],
+      "@stylistic/js/object-curly-spacing": ["error", "always"],
       "@stylistic/ts/member-delimiter-style": ["error", {
         multiline: {
           delimiter: "comma",

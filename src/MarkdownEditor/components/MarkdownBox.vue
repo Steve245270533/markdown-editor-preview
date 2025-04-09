@@ -3,15 +3,16 @@
 	该组件不引入转换器，配合渲染好的页面可以减轻 JS 文件。
 -->
 <template>
-	<div :ref='setup as any'
-class='markdown'
-v-html='html'/>
+	<div
+    :ref='setup as any'
+    class='markdown'
+    v-html='html'
+  />
 </template>
 
 <script setup lang="ts">
-import { activate } from "./core";
-import { noop } from "./core";
-import type { LazyLoadOptions } from "./core";
+import { activate, noop } from "../core";
+import type { LazyLoadOptions } from "../core";
 
 interface MarkdownBoxProps {
 	html: string,
