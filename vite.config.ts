@@ -9,6 +9,7 @@ import dts from "vite-plugin-dts";
 export default defineConfig(({ mode }) => {
   // 基础配置，两种模式共享的配置
   const baseConfig = {
+    base: "./",
     plugins: [
       vue(),
       vueDevTools(),
