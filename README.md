@@ -29,7 +29,8 @@ Markdown预览编辑器是一款功能强大的工具，支持双向滚动同步
 
 <script setup lang='ts'>
 import { ref } from "vue";
-import { MarkdownEditor } from "./MarkdownEditor";
+import { MarkdownEditor } from "markdown-editor-preview";
+import "markdown-editor-preview/style.css"
 
 const content = ref("# Hello Markdown-Editor-Preview!");
 </script>

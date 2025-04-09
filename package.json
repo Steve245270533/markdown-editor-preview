@@ -1,7 +1,6 @@
 {
   "name": "markdown-editor-preview",
-  "version": "0.0.4",
-  "private": true,
+  "version": "0.0.5",
   "description": "markdown-editor-preview",
   "keywords": [
     "markdown",
