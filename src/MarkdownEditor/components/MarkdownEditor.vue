@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang='ts'>
-import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
+import { computed, onMounted, onUnmounted, shallowRef, watch } from "vue";
 import type { ComponentPublicInstance } from "vue";
 import { refDebounced } from "@vueuse/core";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
@@ -43,6 +43,8 @@ import type { Renderer } from "../core";
 const props = withDefaults(defineProps<{
 	/**
 	 * Markdown 渲染器，可以为 MarkdownIt 的实例。
+   *
+   * @default "rich"
 	 */
 	renderer?: Renderer,
 
@@ -52,9 +54,17 @@ const props = withDefaults(defineProps<{
 	 * @default 500
 	 */
 	debounce?: number,
+
+  /**
+   * 是否同步滚动。
+   *
+   * @default true
+   */
+  scrollSynced?: boolean,
 }>(), {
   debounce: 500,
-  renderer: "rich"
+  renderer: "rich",
+  scrollSynced: true,
 });
 
 setupMarkdownTokenizer();
@@ -64,10 +74,15 @@ setupMarkdownTokenizer();
  */
 const content = defineModel<string>({ required: true });
 
+// 保存当前内容的副本，用于判断 content 是由外部还是这里修改的。
+let contentSnapshot = content.value;
+
 const debounced = refDebounced(content, props.debounce);
+const editor = shallowRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 const editorEl = shallowRef<HTMLElement>();
 const previewEl = shallowRef<ComponentPublicInstance>();
 
+const computScrollSynced = computed(() => props.scrollSynced);
 const editorRenderer = computed(() => {
   switch (props.renderer) {
   case "rich":
@@ -78,22 +93,18 @@ const editorRenderer = computed(() => {
   return props.renderer;
 });
 
-let editor: monaco.editor.IStandaloneCodeEditor;
-
-// 保存当前内容的副本，用于判断 content 是由外部还是这里修改的。
-let contentSnapshot = content.value;
 
 const WORD_SEPARATORS =
   "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"	// USUAL_WORD_SEPARATORS
   + "·！￥…*（）—【】：；‘’“”、《》，。？"	// 中文符号。
   + "「」｛｝＜＞・～＠＃＄％＾＆＊＝『』";	// 日韩符号。
 
-watch(content, value => value !== contentSnapshot && editor.setValue(value));
-
-onUnmounted(() => editor.dispose());
+watch(content, value => {
+  if(editor.value && value !== contentSnapshot) editor.value.setValue(value);
+});
 
 onMounted(() => {
-  editor = monaco.editor.create(editorEl.value!, {
+  editor.value = monaco.editor.create(editorEl.value!, {
     value: content.value,
     language: "markdown",
     // 要写方块字（CJK）的话最好调大点。
@@ -109,11 +120,17 @@ onMounted(() => {
     minimap: { enabled: false },
   });
 
-  editor.onDidChangeModelContent(() => {
-    content.value = contentSnapshot = editor.getModel()!.getValue(1);
+  editor.value.onDidChangeModelContent(() => {
+    content.value = contentSnapshot = editor.value!.getModel()!.getValue(1);
   });
 
-  setupScrollSync(editor, previewEl.value!.$el, ref(true));
+  setupScrollSync(editor.value, previewEl.value!.$el, computScrollSynced);
+});
+
+onUnmounted(() => editor.value!.dispose());
+
+defineExpose({
+  editor
 });
 </script>
 

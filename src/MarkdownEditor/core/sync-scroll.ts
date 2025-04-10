@@ -1,5 +1,6 @@
-import { type Ref, watch } from "vue";
+import { watch } from "vue";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
+import type { Ref } from "vue";
 
 type Editor = monaco.editor.IStandaloneCodeEditor;
 
@@ -58,7 +59,6 @@ export function setupScrollSync(editor: Editor, preview: HTMLElement, enabled: R
 
   const obs = new MutationObserver(ensureLineCache);
   obs.observe(preview, { childList: true, subtree: true });
-  editor.onDidDispose(() => obs.disconnect());
 
   /**
 	 * 扫描并缓存渲染结果及其对应的行号，在每次内容更改后都需要重新生成该缓存。
@@ -122,10 +122,11 @@ export function setupScrollSync(editor: Editor, preview: HTMLElement, enabled: R
     return [lineCache[hi], lineCache[lo]]; // 在两个之间
   }
 
-  preview.addEventListener("scroll", () => {
+  function onPreviewScroll() {
     lastScrollEditor = false;
     scrollEditorByPreview(preview.offsetTop);
-  });
+  }
+  preview.addEventListener("scroll", onPreviewScroll);
 
   function scrollEditorByPreview(offset: number) {
     const elements = getElementsAtPosition(offset);
@@ -239,6 +240,12 @@ export function setupScrollSync(editor: Editor, preview: HTMLElement, enabled: R
   if (import.meta.env.MODE !== "lib") {
     window.$debug = { scrollEditorByPreview, scrollPreviewByEditor };
   }
+
+  // 副作用清理
+  editor.onDidDispose(() => {
+    obs.disconnect();
+    preview.removeEventListener("scroll", onPreviewScroll);
+  });
 }
 
 declare global {
