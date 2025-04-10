@@ -80,7 +80,7 @@ let contentSnapshot = content.value;
 const debounced = refDebounced(content, props.debounce);
 const editor = shallowRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 const editorEl = shallowRef<HTMLElement>();
-const previewEl = shallowRef<ComponentPublicInstance>();
+const previewEl = shallowRef<ComponentPublicInstance<InstanceType<typeof MarkdownView>>>();
 
 const computScrollSynced = computed(() => props.scrollSynced);
 const editorRenderer = computed(() => {
@@ -98,6 +98,10 @@ const WORD_SEPARATORS =
   "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"	// USUAL_WORD_SEPARATORS
   + "·！￥…*（）—【】：；‘’“”、《》，。？"	// 中文符号。
   + "「」｛｝＜＞・～＠＃＄％＾＆＊＝『』";	// 日韩符号。
+
+function getHTML() {
+  return previewEl.value!.getHTML();
+}
 
 watch(content, value => {
   if(editor.value && value !== contentSnapshot) editor.value.setValue(value);
@@ -130,7 +134,8 @@ onMounted(() => {
 onUnmounted(() => editor.value!.dispose());
 
 defineExpose({
-  editor
+  editor,
+  getHTML
 });
 </script>
 

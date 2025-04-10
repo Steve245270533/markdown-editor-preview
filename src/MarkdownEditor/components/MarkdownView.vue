@@ -49,4 +49,12 @@ const html = computed(() => {
 
   return resolved.render(value, { docId });
 });
+
+function getHTML() {
+  return html.value;
+}
+
+defineExpose({
+  getHTML,
+});
 </script>
