@@ -1,7 +1,7 @@
 {
   "name": "markdown-editor-preview",
   "version": "0.0.6",
-  "description": "markdown-editor-preview",
+  "description": "基于Vue3和TypeScript的Markdown预览编辑器，支持双向滚动同步、代码高亮和自定义渲染器，提供流畅的编辑和预览体验",
   "keywords": [
     "markdown",
     "editor",

@@ -67,10 +67,10 @@ import "markdown-editor-preview/style.css";
 #### Props
 | 属性名 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `v-model` | `string` |  | 编辑器内容 |
-| `renderer` | `Renderer` | rich | 渲染器类型，可选值为 'rich' 或 'guest' 也可以为 MarkdownIt 的实例 |
-| `debounce` | `number` | 500 | 渲染函数的防抖（毫秒） |
-| `scrollSynced` | `boolean` | true | 是否同步滚动 |
+| v-model | string |  | 编辑器内容 |
+| renderer | Renderer | rich | 渲染器类型，可选值为 'rich' 或 'guest' 也可以为 MarkdownIt 的实例 |
+| debounce | number | 500 | 渲染函数的防抖（毫秒） |
+| scrollSynced | boolean | true | 是否同步滚动 |
 
 #### 预设渲染器
 
@@ -82,8 +82,8 @@ import "markdown-editor-preview/style.css";
 #### Exposes
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| `editor` | `MonacoEditor` | 编辑器实例 |
-| `getHTML` | `Function` | 获取渲染后的HTML内容 |
+| editor | MonacoEditor | 编辑器实例 |
+| getHTML | Function | 获取渲染后的HTML内容 |
 
 ### MarkdownView组件
 
@@ -97,14 +97,14 @@ import "markdown-editor-preview/style.css";
 #### Props
 | 属性名 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `value` | `string` |  | 要渲染的 Markdown 文本，转换过程是同步的 |
-| `renderer` | `Renderer` | 'guest' | 渲染器类型，可选值为 'rich' 或 'guest' 也可以为 MarkdownIt 的实例 |
-| `docId` | `string` |  | 设置唯一 ID，用于区分锚点 |
+| value | string |  | 要渲染的 Markdown 文本，转换过程是同步的 |
+| renderer | Renderer | 'guest' | 渲染器类型，可选值为 'rich' 或 'guest' 也可以为 MarkdownIt 的实例 |
+| docId | string |  | 设置唯一 ID，用于区分锚点 |
 
 #### Exposes
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| `getHTML` | `Function` | 获取渲染后的HTML内容 |
+| getHTML | Function | 获取渲染后的HTML内容 |
 
 ### MarkdownIt
 
