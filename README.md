@@ -83,6 +83,7 @@ import "markdown-editor-preview/style.css";
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | editor | MonacoEditor | 编辑器实例 |
+| selection | Object | 编辑器选区对象 |
 | getHTML | Function | 获取渲染后的HTML内容 |
 
 ### MarkdownView组件
